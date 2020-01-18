@@ -1,0 +1,56 @@
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=GB2312">
+	</head> 
+	
+  <h2>英雄技能</h2>
+  <table border="1" >
+    <tr  bgcolor="#ddd">
+        <td width="115"><strong>技能名</strong></td>
+        <td width="48"><strong>触发</strong></td>
+        <td width="98"><strong>技能属性</strong></td>
+        <td width="445"><strong>技能效果</strong></td>
+        <td width="65">图标</td>
+    </tr>
+    <tr>
+        <td><strong>坚韧</strong></td>
+        <td><strong>被动</strong></td>
+        <td colspan="2">盖伦如果在9秒内不受到任何伤害，之后的每秒都会回复自己最大生命值的0.4%。小兵的伤害不会中断坚韧效果。</td>
+        <td><img src="skill1.png" width="65" height="65" /></td>
+    </tr>
+    <tr>
+      <td><strong>致命打击</strong></td>
+      <td><strong>Q</strong></td>
+      <td>冷却时间：8</td>
+      <td>盖伦移除身上的所有减速效果，并获得30%移动速度加成，持续1.5/2/2.5/3/3.5秒。<br />
+      在接下来的4.5秒内，他的下次普通攻击会造成30/55/80/105/130(+1.4AD)物理伤害，并沉默目标1.5秒。</td>
+      <td><img src="skill2.png" width="64" height="64" /></td>
+    </tr>
+    <tr>
+      <td><strong>勇气</strong></td>
+      <td><strong>W</strong></td>
+      <td>冷却：24/23/22/21/20</td>
+      <td><strong>被动：</strong>击杀一个单位会永久提供0.25护甲和魔法抗性加成，最大值：30<br />
+        <strong>主动：</strong>盖伦获得一个持续2/3/4/5/6秒的防御护盾，减少即将到来的30%伤害。</td>
+      <td><img src="skill3.png" width="64" height="65" /></td>
+    </tr>
+    <tr>
+      <td><strong>审判</strong></td>
+      <td><strong>E</strong></td>
+      <td>冷却：9</td>
+      <td>盖伦快速地旋舞大剑，持续3秒，在持续期间对周围敌人总共造成物理伤害——14/18/22/26/30加上他总攻击力的34/35/36/37/38%，5次(英雄每升3级加1次)。<br />
+        E【审判】会在攻击单个敌人时造成33%额外伤害。<br />
+        取消E【审判】会返还相当于剩余持续时长的冷却时间。<br />
+      E【审判】可以暴击，并造成额外伤害。</td>
+      <td><img src="skill4.png" width="64" height="64" /></td>
+    </tr>
+    <tr>
+      <td><strong>德玛西亚正义</strong></td>
+      <td><strong>R</strong></td>
+      <td>冷却：120/100/80</td>
+      <td><strong>被动：</strong>最近获得最多击杀数的敌人会成为<strong>大反派</strong>。盖伦的E【审判】和普攻会对<strong>大反派</strong>造成额外真实伤害，伤害值为<strong>大反派</strong>1%的最大生命值。<br />
+        <strong>主动：</strong>盖伦召唤德玛西亚之力，试图斩杀一名敌方英雄，目标损失的生命越多，则此技能造成的伤害越高。造成175/350/525魔法伤害加上目标已损失生命值的28/33/40%。对<strong>大反派</strong>造成真实伤害。</td>
+      <td><img src="skill5.png" width="64" height="64" /></td>
+    </tr>
+  </table>
+</html>
