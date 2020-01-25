@@ -1,0 +1,39 @@
+Django:web框架
+html+css+javascript
+elasticsearch学习
+linux服务器
+nginx
+失物招领：论坛形式
+登陆及注册：
+学生使用真实信息去注册及登陆
+老师端具有查看学生信息权限（不对学生开放）
+
+公开信息：老师信息、位置
+
+
+到20号前 把python和前端看完
+21-23   介绍mvc和sql
+年后     django
+
+
+mysql navicat
+编码统一utf8
+
+css3 html5 
+
+服务器+域名 开学后
+
+软件开发流程
+
+python100天：学python：https://github.com/jackfrued/Python-100-Days
+
+https://git-scm.com/
+
+django中文文档：https://docs.djangoproject.com/zh-hans/3.0
+
+html：https://how2j.cn/k/html/html-tutorial/175.html
+
+css：https://how2j.cn/k/css2/css2-tutorial/238.html
+
+JavaScript：https://how2j.cn/k/javascript/javascript-javascript-tutorial/519.html
+
