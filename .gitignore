@@ -1,4 +1,7 @@
+# Virtual Environment
 ENV
+
+# VSCode
 .vscode
 
 # Byte-compiled / optimized / DLL files
