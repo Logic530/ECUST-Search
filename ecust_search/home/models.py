@@ -5,5 +5,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
     class Meta:
+        db_table="home_category"
         verbose_name="分类管理"
         verbose_name_plural=verbose_name
