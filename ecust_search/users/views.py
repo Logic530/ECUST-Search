@@ -26,14 +26,15 @@ class LoginView(View):
     def get(self,request):
         return render(request,"login.html")#static文件尚未编写，此处渲染页面为注册页面
     def post(self,request):
-        username=request.POST.get('username')
-        password=request.POST.get('username')
+        username=request.POST.get("username")
+        password=request.POST.get('password')
         try:
             user=User.objects.get(username=username)
         except User.DoesNotExist:
-            return render(request,"login.html")
+            return render(request,'login.html')
         if not check_password(password,user.password):
-            return render(request,"login.html")
-        request.session['id']=user.id
-        request.session['name']=user.username
+            error_msg = "用户名或密码错误"
+            return render(request, 'login.html', {'error_msg': error_msg})
+        request.session['id'] = user.id
+        request.session['name'] = user.username
         return redirect(reverse('home:index'))
