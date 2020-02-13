@@ -26,7 +26,7 @@ SECRET_KEY = 'z0y92)22wxt3oih@=tpv$@wob3maf$@z==j6t0h^og#5*$b7u-'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '111.231.140.165'
+    'localhost',
 ]
 
 
@@ -77,11 +77,8 @@ WSGI_APPLICATION = 'ecust_search.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django',
-        'HOST': 'localhost',
-        'PASSWORD': 'ECUSTsearch965313Django',
-        'USER': 'django',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'django.sqlite',
     }
 }
 
