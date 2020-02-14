@@ -10,6 +10,9 @@ ENV
 # Sqlite datebase
 *.sqlite
 
+# Database migrations
+migrations/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

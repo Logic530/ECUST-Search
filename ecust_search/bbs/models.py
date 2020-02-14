@@ -1,5 +1,15 @@
 from django.db import models
-from django.contirb.auth.models import AbstractUser
+from django.contrib.auth.models import User
+
+
+# 板块数据模型
+class Section(models.Model):
+    # 板块标题，字符串，最大10
+    title = models.CharField(max_length=10)
+    # 板块描述
+    description = models.CharField(max_length=300)
+    # 板块管理员，多对多关系，不知道配置是否正确
+    admin = models.ManyToManyField(User)
 
 
 # 帖子数据模型
