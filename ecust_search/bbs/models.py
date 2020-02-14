@@ -1,4 +1,5 @@
 from django.db import models
+from django.contirb.auth.models import AbstractUser
 
 
 # 帖子数据模型
@@ -39,3 +40,24 @@ class Section(models.Model):
     # 板块名称，字符串，最大10
     section_name = models.CharField(max_length=10)
     # 还有一些别的什么？我不知道了
+
+
+class User(AbstractUser):
+    mobile = models.CharField(max_length=11, unique=True, verbose_name='电话号码')
+    privilege = models.CharField(max_length=200, default=0, verbose_name="权限")
+    friends = models.ManyToManyField('self', blank=True, null=True, related_name='friends')
+
+    class Meta:
+        db_table = 'tb_users'
+        verbose_name = '用户'
+        verbose_name_plural = verbose_name
+        ordering = ['-date_joined']
+
+    def __str__(self):
+        return self.username
+
+    def checkfriend(self, username):
+        if username in self.friends.all():
+            return True
+        else:
+            return False
