@@ -13,6 +13,7 @@ class Section(models.Model):
 
     class Meta:
         verbose_name = "板块"
+        verbose_name_plural = verbose_name
 
     def __str__(self):
         return self.title
@@ -35,6 +36,7 @@ class Topic(models.Model):
 
     class Meta:
         verbose_name = "帖子"
+        verbose_name_plural = verbose_name
         ordering = ['-datetime']
 
     def __str__(self):
@@ -53,6 +55,10 @@ class Comment(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, verbose_name="评论所属帖子")
     # 评论被点赞数
     liked_count = models.IntegerField(default=0, verbose_name="评论被点赞次数")
+
+    class Meta:
+        verbose_name = "评论"
+        verbose_name_plural = verbose_name
 
     def __str__(self):
         return self.owner.username + " 在 " + str(self.datetime) + " 发布于 " + self.topic.title + " 的评论"
