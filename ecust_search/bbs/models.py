@@ -3,9 +3,9 @@ from django.contrib.auth.models import User
 
 
 # 板块数据模型
-class Section(models.Model, unique=True):
+class Section(models.Model):
     # 板块标题，字符串，最大10
-    title = models.CharField(max_length=10, verbose_name="板块标题")
+    title = models.CharField(max_length=10, unique=True, verbose_name="板块标题")
     # 板块描述
     description = models.CharField(max_length=300, verbose_name="板块描述")
     # 板块管理员，多对多关系，不知道配置是否正确
