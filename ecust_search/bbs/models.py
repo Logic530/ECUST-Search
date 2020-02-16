@@ -40,3 +40,12 @@ class Comment(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     # 评论被点赞数
     liked_count = models.IntegerField()
+
+
+# 用户档案模型，用于扩展用户信息字段，这里仅存放论坛APP相关的信息字段
+class Profile(models.Model):
+    # 指定一对一用户关系
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # 没想好有什么，可以弄个徽章什么的？
+    # 或者是论坛的积分
+    # points = models.IntegerField()
