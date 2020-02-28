@@ -20,6 +20,19 @@ class Section(models.Model):
         return self.title
 
 
+# 标签数据类型
+class Tag(models.Model):
+    # 标签名称
+    name = models.CharField(max_length=10, unique=True, verbose_name="标签名称")
+
+    class Meta:
+        verbose_name = "标签"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
+
+
 # 帖子数据模型
 class Topic(models.Model):
     # 贴子标题，字符串，最大长度30
@@ -32,8 +45,43 @@ class Topic(models.Model):
     datetime = models.DateTimeField(auto_now=True, verbose_name="发帖时间")
     # 帖子所属板块，应该是外键
     section = models.ForeignKey(Section, on_delete=models.CASCADE, verbose_name="所属板块")
-    # 帖子被点赞次数
-    liked_count = models.IntegerField(default=0, verbose_name="被点赞次数")
+
+    # 帖子所属板块标题
+    @property
+    def section_title(self):
+        return self.section.title
+
+    # 点赞用户列表
+    liked_users = models.ManyToManyField(User, related_name="liked_user", blank=True, verbose_name="点赞用户列表")
+    # 帖子被浏览数
+    viewed_count = models.IntegerField(default=0, verbose_name="帖子被浏览次数")
+    # 是否被解决
+    solved = models.BooleanField(default=False, verbose_name="是否被解决")
+    # 标签
+    tags = models.ManyToManyField(Tag, blank=True, verbose_name="标签")
+
+    # 回复计数
+    @property
+    def reply_count(self):
+        if self.comment_set:
+            return self.comment_set.count()
+        else:
+            return 0
+
+    """    
+    # 最近回复时间
+    @property
+    def latest_reply_time(self):
+        if self.comment_set:
+            return self.comment_set[0].datetime
+        else:
+            return None
+    """
+
+    # 点赞计数
+    @property
+    def liked_count(self):
+        return self.liked_users.count()
 
     class Meta:
         verbose_name = "帖子"

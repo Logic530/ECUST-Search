@@ -13,6 +13,9 @@ from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 from django.contrib.auth.models import User
 import logging
+from django.http import HttpResponse, JsonResponse
+from .serializers import TopicSerializer
+from .models import Topic
 
 logger = logging.getLogger(__name__)
 import os
@@ -30,18 +33,26 @@ def section(request, section_name: str):
     return HttpResponse("这是板块视图,你正在查看 " + section_name + " 板块")
 
 
-# 请求帖子列表,JS的api，用户不会直接访问
-def get_topic(request):
-    response = {'info': 'Your request information as below',
-                'start': request.GET['start'],
-                'num': request.GET['num']
-                }
-    return HttpResponse(json.dumps(response), content_type='application/json')
-
-
 # 帖子视图
 def topic(request, topic_id: int):
     return HttpResponse("这是贴子视图," + "你正在查看帖子ID " + str(topic_id))
+
+
+def get_recent_topic(request):
+    if request.method == 'GET':
+        topics = Topic.objects.all().order_by('-datetime')
+        serializer = TopicSerializer(topics, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+
+'''
+def get_hot_topic(request):
+    if request.method == 'GET':
+        # 下面这句没法用，不知道怎样才能按回复数排序
+        topics = Topic.objects.all().order_by('reply_count')
+        serializer = TopicSerializer(topics, many=True)
+        return JsonResponse(serializer.data)
+'''
 
 class CustomBackend(ModelBackend):
     def authenticate(self,request,username=None,password=None):
