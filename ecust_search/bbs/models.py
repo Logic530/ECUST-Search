@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -68,6 +69,8 @@ class Comment(models.Model):
 class Profile(models.Model):
     # 指定一对一用户关系
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="档案对应用户")
+    friends=models.ManyToManyField('self',blank=True,related_name='friends')
+    phone=models.PositiveIntegerField(verbose_name='电话号码')
 
     # 没想好有什么，可以弄个徽章什么的？
     # 或者是论坛的积分

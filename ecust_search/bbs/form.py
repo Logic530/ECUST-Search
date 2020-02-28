@@ -1,7 +1,9 @@
+#-*- coding:utf-8 -*-
 from django import forms
-from forum.models import Message, Post, LoginUser
+from django.contrib.auth.models import User
 
-class LoginUserForm(forms.ModelForm):
+
+class UserForm(forms.ModelForm):
     #错误信息
     error_messages = {
         'duplicate_username': u"此用户已存在.",
@@ -27,7 +29,7 @@ class LoginUserForm(forms.ModelForm):
         widget=forms.PasswordInput, error_messages={'required': u"确认密码未填"})
 
     class Meta:
-        model = LoginUser
+        model = User
         fields = ("username", "email")
 
     def clean_username(self):
@@ -35,8 +37,8 @@ class LoginUserForm(forms.ModelForm):
         # but it sets a nicer error message than the ORM. See #13147.
         username = self.cleaned_data["username"]
         try:
-            LoginUser._default_manager.get(username=username)
-        except LoginUser.DoesNotExist:
+            User._default_manager.get(username=username)
+        except User.DoesNotExist:
             return username
         raise forms.ValidationError(self.error_messages["duplicate_username"])
 
@@ -53,13 +55,13 @@ class LoginUserForm(forms.ModelForm):
 
         #判断是这个email 用户是否存在
         try:
-            LoginUser._default_manager.get(email=email)
-        except LoginUser.DoesNotExist:
+            User._default_manager.get(email=email)
+        except User.DoesNotExist:
             return email
         raise forms.ValidationError(self.error_messages["duplicate_email"])
 
     def save(self, commit=True):
-        user = super(LoginUserForm, self).save(commit=False)
+        user = super(UserForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password"])
         if commit:
             user.save()

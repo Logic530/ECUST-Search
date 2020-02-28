@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+
+  <title>ECUST Forum</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="{% static 'css/loginstyle.css' %}">
+
+
+</head>
+
+<body>
+
+  <div class="modal-wrap">
+
+    <div class="modal-bodies">
+      <div class="modal-body modal-body-step-1 is-showing">
+        <div class="title">注册 ECUST Forum</div>
+        <div class="description">你好，完成以下内容注册账号</div>
+        <form method="POST" id="signup_form" action="{% url 'bbs:user_signup' %}">
+            {% csrf_token %}
+          <input type="text" name="username" placeholder="用户名*" />
+          <input type="email" name='email' placeholder="邮件地址*" />
+          <input type="password" name="password" placeholder="密码*" />
+          <input type="password" name="password_confirm" placeholder="确认密码*" />
+          <div class="text-center">
+            <div onclick="document:signup_form.submit();" class="button" value="注册">注册</div>
+          </div>
+            <a>{{ errors }}</a>
+        </form>
+      </div>
+
+
+    </div>
+  </div>
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+
+
+
+</body>
+
+</html>

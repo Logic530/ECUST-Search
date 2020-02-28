@@ -1,0 +1,488 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ask Me</title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+
+    <!-- ==========header mega navbar=======-->
+    <div class="top-menu-bottom932">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle
+                            navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span> </button>
+                    <a class="navbar-brand" href="#">
+                        <p>ECUST Forum Logo</p>
+                    </a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                {% if request.user.is_authenticated %}
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav"> </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{% url 'bbs:index' %}">主页 </a></li>
+                        <li><a href="ask_question.html" target="_blank">发起话题 </a></li>
+                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="false">浏览话题 <span class="caret"></span></a>
+                            <ul class="dropdown-menu animated zoomIn">
+                                <li><a href="category.html" target="_blank">话题组 1 </a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">{{ user.username }}</a></li>
+                        <li><a href="{% url 'bbs:user_logout' %}">退出</a></li>
+                    </ul>
+                </div>
+                {% else %}
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav"> </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="index.html">主页 </a></li>
+                        <li><a href="{% url 'bbs:user_login' %}" target="_blank">发起话题 </a></li>
+                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                                 aria-haspopup="true" aria-expanded="false">浏览话题 <span class="caret"></span></a>
+                            <ul class="dropdown-menu animated zoomIn">
+                                <li><a href="category.html" target="_blank">话题组 1 </a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"> <a href="{% url 'bbs:user_login' %}" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                                 aria-haspopup="true" aria-expanded="false">浏览用户 <span class="caret"></span></a>
+                            <ul class="dropdown-menu animated zoomIn">
+                                <li><a href="user.html" target="_blank">用户组 1 </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                {% endif %}
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </div>
+
+
+    <!--======= welcome section on top background=====-->
+    <section class="welcome-part-one">
+        <div class="container">
+            <div class="welcome-demop102 text-center">
+                <h2>欢迎来到 ECUST Forum</h2>
+                <p>在这里你可以负责任的思考，大胆而自由的生活。<br />
+                    1. 积极互助与反馈，自由负责的发言。<br />
+                    2. 本网站不会透露个人隐私，没有广告。<br />
+                    3. 禁止使用任何歧视性字眼。<br />
+                    4. 可以与宇宙中每一个注册账号的物种交朋友。<br />
+                    5. 可以出门的时候不要忘记与朋友聚餐，任何社交网络都无法取代美食。<br />
+                </p>
+                {% if request.user.is_authenticated %}
+               <p>{{ user.username }}已登录</p>
+                <div class="form-style8292">
+                    <div class="input-group"> <span class="input-group-addon"><i class="fa fa-pencil-square"
+                                                                                 aria-hidden="true"></i></span>
+                        <input type="text" class="form-control form-control8392" placeholder="有任何想要知道的吗？"> <span
+                                class="input-group-addon"><a href="#">提问</a></span> </div>
+                </div>
+                {% else %}
+                <div class="button0239-item">
+                    <a href="{% url 'bbs:user_login' %}">
+                        <button type="button" class="aboutus022">登录</button>
+                    </a>
+                    <a href="{% url 'bbs:user_signup' %}">
+                        <button type="button" class="join92" >注册</button>
+                    </a>
+                </div>
+                <div class="form-style8292">
+                    <div class="input-group"> <span class="input-group-addon"><i class="fa fa-pencil-square"
+                                aria-hidden="true"></i></span>
+                        <input type="text" class="form-control form-control8392" placeholder="有任何想要知道的吗？"> <span
+                            class="input-group-addon"><a href="{% url 'bbs:user_login' %}">提问</a></span> </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ======content section/body=====-->
+    <section class="main-content920">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div id="main">
+                        <input id="tab1" type="radio" name="tabs" checked>
+                        <label for="tab1">最新话题</label>
+                        <input id="tab2" type="radio" name="tabs">
+                        <label for="tab2">热门话题</label>
+                        <input id="tab3" type="radio" name="tabs">
+                        <label for="tab3">最近回复的话题</label>
+                        <input id="tab4" type="radio" name="tabs">
+                        <label for="tab4">未回复的话题</label>
+                        <input id="tab5" type="radio" name="tabs">
+                        <label for="tab5">最新回复</label>
+
+
+
+                        <section id="content1">
+                            <!--Recent Question Content Section -->
+                            <div class="question-type2033">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <div class="left-user12923 left-user12923-repeat">
+                                            <a href="#">
+                                                <img src="image/images.png" alt="image"> 
+                                            </a> 
+                                            <a href="#">
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                            </a> 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="right-description893">
+                                            <div id="que-hedder2983">
+                                                <h3>
+                                                    <a href="post-deatils.html" target="_blank">英语考试过了，现在还能改体育课吗？</a>
+                                                </h3> 
+                                            </div>
+                                            <div class="ques-details10018">
+                                                <p>大英考试过了不用再上了，想把体育课时间改到大英的时间。以前退改选的时候能改体育课。现在通知说必修课不能改了，那体育还能改吗？</p>
+                                            </div>
+                                            <hr>
+                                           <div class="ques-icon-info3293"> <a href="#"><i class="fa fa-check" aria-hidden="true"> 已解决</i></a> <a href="#"><i class="fa fa-star" aria-hidden="true"> 5</i> </a> <a href="#"><i class="fa fa-folder" aria-hidden="true"> 话题组 1</i></a> <a href="#"><i class="fa fa-clock-o" aria-hidden="true"> 4 分钟前</i></a> <a href="#"><i class="fa fa-comment" aria-hidden="true">  3 回答</i></a> <a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"> 70 浏览</i> </a> </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="ques-type302">
+                                            <a href="#">
+                                                <button type="button" class="q-type238"><i class="fa fa-comment" aria-hidden="true"> 3 回答</i></button>
+                                            </a>
+                                            <a href="#">
+                                                <button type="button" class="q-type23 button-ques2973"> <i class="fa fa-user-circle-o" aria-hidden="true"> 70 浏览</i> </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!--  End of content-1------>
+
+                        <section id="content2">
+                            <!--Most Response Content Section -->
+                            <div class="question-type2033">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <div class="left-user12923 left-user12923-repeat">
+                                            <a href="#">
+                                                <img src="image/images.png" alt="image">
+                                            </a>
+                                            <a href="#">
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="right-description893">
+                                            <div id="que-hedder2983">
+                                                <h3>
+                                                    <a href="post-deatils.html" target="_blank">英语考试过了，现在还能改体育课吗？</a>
+                                                </h3>
+                                            </div>
+                                            <div class="ques-details10018">
+                                                <p>大英考试过了不用再上了，想把体育课时间改到大英的时间。以前退改选的时候能改体育课。现在通知说必修课不能改了，那体育还能改吗？</p>
+                                            </div>
+                                            <hr>
+                                            <div class="ques-icon-info3293"> <a href="#"><i class="fa fa-check"
+                                                        aria-hidden="true"> 已解决</i></a> <a href="#"><i
+                                                        class="fa fa-star" aria-hidden="true"> 5</i> </a> <a href="#"><i
+                                                        class="fa fa-folder" aria-hidden="true"> 话题组 1</i></a> <a
+                                                    href="#"><i class="fa fa-clock-o" aria-hidden="true"> 4 分钟前</i></a>
+                                                <a href="#"><i class="fa fa-comment" aria-hidden="true"> 3 回答</i></a> <a
+                                                    href="#"><i class="fa fa-user-circle-o" aria-hidden="true"> 70
+                                                        浏览</i> </a> </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="ques-type302">
+                                            <a href="#">
+                                                <button type="button" class="q-type238"><i class="fa fa-comment"
+                                                        aria-hidden="true"> 3 回答</i></button>
+                                            </a>
+                                            <a href="#">
+                                                <button type="button" class="q-type23 button-ques2973"> <i
+                                                        class="fa fa-user-circle-o" aria-hidden="true"> 70 浏览</i>
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!----end of content-2----->
+
+                        <section id="content3">
+                            <!--Recently answered Content Section -->
+                            <div class="question-type2033">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <div class="left-user12923 left-user12923-repeat">
+                                            <a href="#">
+                                                <img src="image/images.png" alt="image">
+                                            </a>
+                                            <a href="#">
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="right-description893">
+                                            <div id="que-hedder2983">
+                                                <h3>
+                                                    <a href="post-deatils.html" target="_blank">英语考试过了，现在还能改体育课吗？</a>
+                                                </h3>
+                                            </div>
+                                            <div class="ques-details10018">
+                                                <p>大英考试过了不用再上了，想把体育课时间改到大英的时间。以前退改选的时候能改体育课。现在通知说必修课不能改了，那体育还能改吗？</p>
+                                            </div>
+                                            <hr>
+                                            <div class="ques-icon-info3293"> <a href="#"><i class="fa fa-check"
+                                                        aria-hidden="true"> 已解决</i></a> <a href="#"><i
+                                                        class="fa fa-star" aria-hidden="true"> 5</i> </a> <a href="#"><i
+                                                        class="fa fa-folder" aria-hidden="true"> 话题组 1</i></a> <a
+                                                    href="#"><i class="fa fa-clock-o" aria-hidden="true"> 4 分钟前</i></a>
+                                                <a href="#"><i class="fa fa-comment" aria-hidden="true"> 3 回答</i></a> <a
+                                                    href="#"><i class="fa fa-user-circle-o" aria-hidden="true"> 70
+                                                        浏览</i> </a> </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="ques-type302">
+                                            <a href="#">
+                                                <button type="button" class="q-type238"><i class="fa fa-comment"
+                                                        aria-hidden="true"> 3 回答</i></button>
+                                            </a>
+                                            <a href="#">
+                                                <button type="button" class="q-type23 button-ques2973"> <i
+                                                        class="fa fa-user-circle-o" aria-hidden="true"> 70 浏览</i>
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!--End content-3 -->
+
+
+
+                        <section id="content4">
+                            <!--No answered Content Section -->
+                            <div class="question-type2033">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <div class="left-user12923 left-user12923-repeat">
+                                            <a href="#">
+                                                <img src="image/images.png" alt="image">
+                                            </a>
+                                            <a href="#">
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="right-description893">
+                                            <div id="que-hedder2983">
+                                                <h3>
+                                                    <a href="post-deatils.html" target="_blank">英语考试过了，现在还能改体育课吗？</a>
+                                                </h3>
+                                            </div>
+                                            <div class="ques-details10018">
+                                                <p>大英考试过了不用再上了，想把体育课时间改到大英的时间。以前退改选的时候能改体育课。现在通知说必修课不能改了，那体育还能改吗？</p>
+                                            </div>
+                                            <hr>
+                                            <div class="ques-icon-info3293"> <a href="#"><i class="fa fa-check"
+                                                        aria-hidden="true"> 已解决</i></a> <a href="#"><i
+                                                        class="fa fa-star" aria-hidden="true"> 5</i> </a> <a href="#"><i
+                                                        class="fa fa-folder" aria-hidden="true"> 话题组 1</i></a> <a
+                                                    href="#"><i class="fa fa-clock-o" aria-hidden="true"> 4 分钟前</i></a>
+                                                <a href="#"><i class="fa fa-comment" aria-hidden="true"> 3 回答</i></a> <a
+                                                    href="#"><i class="fa fa-user-circle-o" aria-hidden="true"> 70
+                                                        浏览</i> </a> </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="ques-type302">
+                                            <a href="#">
+                                                <button type="button" class="q-type238"><i class="fa fa-comment"
+                                                        aria-hidden="true"> 3 回答</i></button>
+                                            </a>
+                                            <a href="#">
+                                                <button type="button" class="q-type23 button-ques2973"> <i
+                                                        class="fa fa-user-circle-o" aria-hidden="true"> 70 浏览</i>
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End of content-4-->
+                        </section>
+
+
+                        <section id="content5">
+                            <!--Recent Question Content Section -->
+                            <div class="question-type2033">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <div class="left-user12923 left-user12923-repeat">
+                                            <a href="#">
+                                                <img src="image/images.png" alt="image"> 
+                                            </a> 
+                                            <a href="#">
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                            </a> 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="right-description893">
+                                            <div id="que-hedder2983">
+                                                <h3>
+                                                    <a href="post-deatils.html" target="_blank">英语考试过了，现在还能改体育课吗？</a>
+                                                </h3> 
+                                            </div>
+                                            <div class="ques-details10018">
+                                                <p>大英考试过了不用再上了，想把体育课时间改到大英的时间。以前退改选的时候能改体育课。现在通知说必修课不能改了，那体育还能改吗？</p>
+                                            </div>
+                                            <hr>
+                                           <div class="ques-icon-info3293"> <a href="#"><i class="fa fa-check" aria-hidden="true"> 已解决</i></a> <a href="#"><i class="fa fa-star" aria-hidden="true"> 5</i> </a> <a href="#"><i class="fa fa-folder" aria-hidden="true"> 话题组 1</i></a> <a href="#"><i class="fa fa-clock-o" aria-hidden="true"> 4 分钟前</i></a> <a href="#"><i class="fa fa-comment" aria-hidden="true">  3 回答</i></a> <a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"> 70 浏览</i> </a> </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="ques-type302">
+                                            <a href="#">
+                                                <button type="button" class="q-type238"><i class="fa fa-comment" aria-hidden="true"> 3 回答</i></button>
+                                            </a>
+                                            <a href="#">
+                                                <button type="button" class="q-type23 button-ques2973"> <i class="fa fa-user-circle-o" aria-hidden="true"> 70 浏览</i> </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End of content-5-->
+                        </section>
+
+                    </div>
+                </div>
+                <!--end of col-md-9 -->
+                <!--strart col-md-3 (side bar)-->
+                <aside class="col-md-3 sidebar97239">
+                    <div class="status-part3821">
+                        <h4>统计</h4>
+                        <a href="#">
+                            <i class="fa fa-question-circle" aria-hidden="true"> 话题(20)</i>
+                        </a>
+                        <i class="fa fa-comment" aria-hidden="true"> 回复(50)</i>
+                    </div>
+                    <div class="categori-part329">
+                        <h4>话题组</h4>
+                        <ul>
+                            <li><a href="#">话题组 1</a></li>
+                            <li><a href="#">话题组 2</a></li>
+                            <li><a href="#">话题组 3</a></li>
+                            <li><a href="#">话题组 4</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- login part -->
+                    {% if not request.user.is_authenticated %}
+                    <div class="login-part2389">
+                        <h4>登录</h4>
+                        <form method="POST" id="login_form" action="{% url 'bbs:user_login' %}">
+                            {% csrf_token %}
+                            <div class="input-group300"> <span><i class="fa fa-user" aria-hidden="true"></i></span>
+                                <input type="text" class="namein309" placeholder="Email" name="email"> </div>
+                            <div class="input-group300"> <span><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                <input type="password" class="passin309" placeholder="Password" name="password"> </div>
+                            <a href="#">
+                                <button type="submit" class="userlogin320" >登录</button>
+                            </a>
+                            <div class="rememberme">
+                                <label>
+                                    <input type="checkbox" checked="checked"> 记住我 </label> <a href="{% url 'bbs:user_signup' %}"
+                                    class="resbutton3892"> 注册 </a>
+                            </div>
+                        </form>
+                    </div>
+                    {% endif %}
+                    <!-- tags part -->
+                    <div class="tags-part2398">
+                        <h4>标签</h4>
+                        <ul>
+                            <li><a href="#">标签 1 </a></li>
+                            <li><a href="#">标签 2 </a></li>
+                            <li><a href="#">标签 3 </a></li>
+                            <li><a href="#">标签 4 </a></li>
+                            <li><a href="#">标签 5 </a></li>
+                            <li><a href="#">标签 6 </a></li>
+                            <li><a href="#">标签 7 </a></li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+    <!--    footer -->
+    <div class="footer-search">
+        <div class="container">
+            <div class="row">
+                <div id="custom-search-input">
+                    <div class="input-group col-md-12"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <input type="text" class="  search-query form-control user-control30"
+                            placeholder="在这里搜索......" /> <span class="input-group-btn">
+                            <button class="btn btn-danger" type="button">
+                                <span class=" glyphicon glyphicon-search"></span> </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="footer-social">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Copyright 2020 ECUST Forum | <strong>Sun and teammates</strong></p>
+                </div>
+                <div class="col-md-6">
+                    <div class="social-right2389"> <a href="#"><i class="fa fa-twitter-square"
+                                aria-hidden="true"></i></a> <a href="#"><i class="fa fa-facebook"
+                                aria-hidden="true"></i></a> <a href="#"><i class="fa fa-google-plus"
+                                aria-hidden="true"></i></a> <a href="#"><i class="fa fa-youtube"
+                                aria-hidden="true"></i></a> <a href="#"><i class="fa fa-skype"
+                                aria-hidden="true"></i></a> <a href="#"><i class="fa fa-linkedin"
+                                aria-hidden="true"></i></a> <a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/npm.js"></script>
+</body>
+
+</html>
